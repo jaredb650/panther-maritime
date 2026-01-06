@@ -98,7 +98,6 @@ body {
     max-height: 200px;
     width: auto;
     height: auto;
-    filter: drop-shadow(0 0 60px var(--navy-dark)) drop-shadow(0 0 120px var(--navy-dark));
 }
 
 /* Prevent scroll during preloader */
