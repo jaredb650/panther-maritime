@@ -3,7 +3,13 @@
  * Handles navigation, calendar, animations, and form interactions
  */
 
+// Preloader - runs immediately
+document.body.classList.add('loading');
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize preloader
+    initPreloader();
+
     // Initialize all components
     initNavigation();
     initCalendar();
@@ -11,6 +17,40 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initFormHandlers();
 });
+
+/**
+ * Preloader Handler
+ * Handles the animated logo preloader sequence
+ */
+function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    const preloaderContent = document.querySelector('.preloader-content');
+    const preloaderAnimation = document.getElementById('preloaderAnimation');
+
+    // Duration of the animated webp (adjust this to match your animation length)
+    const animationDuration = 3000; // 3 seconds - adjust based on actual animation
+    const logoFadeDuration = 600;
+    const backgroundFadeDuration = 800;
+
+    // Wait for animation to complete
+    setTimeout(() => {
+        // Step 1: Fade out the logo (freeze on last frame happens naturally)
+        preloaderContent.classList.add('fade-out');
+
+        // Step 2: After logo fades, fade out the blue background
+        setTimeout(() => {
+            preloader.classList.add('fade-out');
+
+            // Step 3: Remove preloader from DOM after fade completes
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                document.body.classList.remove('loading');
+            }, backgroundFadeDuration);
+
+        }, logoFadeDuration);
+
+    }, animationDuration);
+}
 
 /**
  * Navigation Handler
